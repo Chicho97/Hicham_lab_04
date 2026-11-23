@@ -1,5 +1,7 @@
 # Lab 4 - Task 1: Goldbach's Conjecture
 
+# Lab 4 - Task 1: Goldbach's Conjecture
+
 
 def is_prime(num):
     # Numbers less than 2 are not prime
@@ -14,12 +16,20 @@ def is_prime(num):
     return True
 
 
-def find_pairs(n):
-    # Find all pairs (p, q) where p + q == n and p <= q
+def goldbach_pairs(n):
+    # Return a list of all pairs (p, q) where p + q == n and p <= q
+    pairs = []
     for p in range(2, n // 2 + 1):
         q = n - p
         if is_prime(p) and is_prime(q):
-            print(f"{n} = {p} + {q}")
+            pairs.append((p, q))
+    return pairs
+
+
+def find_pairs(n):
+    # Print all pairs (p, q) where p + q == n and p <= q
+    for p, q in goldbach_pairs(n):
+        print(f"{n} = {p} + {q}")
 
 
 def main():
@@ -42,4 +52,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()# Task 1 implementation 
+    main()
