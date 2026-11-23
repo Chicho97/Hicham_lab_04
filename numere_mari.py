@@ -1,6 +1,5 @@
 # Lab 4 - Task 2: Addition and Multiplication of Large Numbers (up to 200 digits)
 
-
 def clean_zeros(num_str):
     # Remove extra leading zeros, e.g. "00999" -> "999", keep "0" if all zeros
     cleaned = num_str.lstrip("0")
@@ -9,9 +8,15 @@ def clean_zeros(num_str):
 
 def is_valid_number(num_str):
     # Must be digits only and at most 200 digits long
+    if not isinstance(num_str, str):
+        return False
     if len(num_str) == 0 or len(num_str) > 200:
         return False
     return num_str.isdigit()
+
+
+def validate_number(num_str):
+    return is_valid_number(num_str)
 
 
 def add_big_numbers(a, b):
@@ -35,6 +40,10 @@ def add_big_numbers(a, b):
     # Reverse because we added from right to left
     result.reverse()
     return clean_zeros("".join(result))
+
+
+def add_numbers(a, b):
+    return add_big_numbers(a, b)
 
 
 def multiply_big_numbers(a, b):
@@ -64,6 +73,10 @@ def multiply_big_numbers(a, b):
     return clean_zeros(result_str)
 
 
+def multiply_numbers(a, b):
+    return multiply_big_numbers(a, b)
+
+
 def main():
     try:
         with open("numere.txt", "r", encoding="utf-8") as file:
@@ -78,7 +91,7 @@ def main():
 
     num1, num2 = lines[0], lines[1]
 
-    if not is_valid_number(num1) or not is_valid_number(num2):
+    if not validate_number(num1) or not validate_number(num2):
         print("Error: each number must have 1 to 200 digits and contain only digits.")
         return
 
@@ -87,8 +100,8 @@ def main():
 
     print("First number:", num1)
     print("Second number:", num2)
-    print("Sum:", add_big_numbers(num1, num2))
-    print("Product:", multiply_big_numbers(num1, num2))
+    print("Sum:", add_numbers(num1, num2))
+    print("Product:", multiply_numbers(num1, num2))
 
 
 if __name__ == "__main__":
